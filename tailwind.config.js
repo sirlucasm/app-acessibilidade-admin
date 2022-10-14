@@ -13,6 +13,7 @@ module.exports = {
       },
       colors: {
         primary: "#EAEBEF",
+        'button-primary': '#1283C6',
       },
     },
   },
