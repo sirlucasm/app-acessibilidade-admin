@@ -41,7 +41,7 @@ const Locations = () => {
 
             return (
               <Link href={`locais/${place.id}`} key={index}>
-                <a className="flex justify-between bg-white hover:bg-gray-100 duration-150 rounded-lg w-[500px] p-4 items-center">
+                <a className="flex justify-between bg-white hover:bg-gray-100 duration-150 rounded-lg w-[500px] p-4 mb-3 items-center">
                   <div className="flex">
                     <div>
                       <Image

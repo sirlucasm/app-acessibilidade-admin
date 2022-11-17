@@ -37,3 +37,50 @@ export const generateAccessibleObj = (accessible: Accessible) => ({
 });
 
 export const accessibleColorString = (accessible: Accessible) => color[accessible];
+
+export const PlaceDetails = [
+  {
+    label: 'Banheiro',
+    value: 'Banheiro'
+  },
+  {
+    label: 'Estacionamento',
+    value: 'Estacionamento'
+  },
+  {
+    label: 'Rampas',
+    value: 'Rampas'
+  },
+  {
+    label: 'Piso tátil',
+    value: 'Piso tátil'
+  },
+  {
+    label: 'Calçada',
+    value: 'Calçada'
+  },
+  {
+    label: 'Faixa de pedestre',
+    value: 'Faixa de pedestre'
+  },
+  {
+    label: 'Mesas',
+    value: 'Mesas'
+  },
+  {
+    label: 'Arborizada',
+    value: 'Arborizada'
+  },
+  {
+    label: 'Espaço KIDS',
+    value: 'Espaço KIDS'
+  },
+  {
+    label: 'Food truck',
+    value: 'Food truck'
+  },
+  {
+    label: 'Bancos',
+    value: 'Bancos'
+  },
+]

@@ -3,6 +3,8 @@ import { Container } from "../components/containers";
 import { Loading } from "../components/loading";
 import { useAuthContext } from "../contexts/auth.context";
 import { MdPlace } from 'react-icons/md';
+import { signOut } from "firebase/auth";
+import { auth } from "../configs/firebase";
 
 const Application = () => {
   const { currentUser } = useAuthContext()
@@ -15,8 +17,14 @@ const Application = () => {
 
   return (
     <div className="flex flex-col p-10 h-[100vh] bg-primary">
-      <div className="">
+      <div className="flex items-center justify-between sm:w-[400px]">
         <h2 className="text-2xl">Olá, <strong>{currentUser.name}</strong></h2>
+        <button
+          onClick={() => signOut(auth)}
+          className="border-0 text-blue-600 hover:text-blue-800 hover:underline"
+        >
+          sair
+        </button>
       </div>
       <div className="flex items-center mt-7">
         <div className="bg-white hover:bg-gray-300 w-[190px] h-[95px] rounded duration-100">
