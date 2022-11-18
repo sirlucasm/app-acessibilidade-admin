@@ -8,7 +8,7 @@ type ContainerProps = PropsWithChildren & {
 
 export const Container = ({ children, justifyContent='start', alignItems='start' }: ContainerProps) => {
   return (
-    <div className={clsx('flex flex-col h-[100vh] w-[100%]', {
+    <div className={clsx('flex flex-col h-[100vh] w-[100%] bg-primary', {
       [`justify-${justifyContent}`]: justifyContent,
       [`items-${alignItems}`]: alignItems,
     })}>

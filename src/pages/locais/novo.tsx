@@ -42,6 +42,7 @@ const NewLocation = () => {
       title: data.title
     });
 
+    toast.success('Local cadastrado com sucesso!');
     router.replace('/locais');
   }
 
@@ -64,10 +65,16 @@ const NewLocation = () => {
       !body.image
     ) return;
 
-    await handleUploadProfileImage(body.image, body.title);
+    try {
+      await handleUploadProfileImage(body.image, body.title);
 
-    const imageRef = ref(storage, `images/places/${watch('title')}/${body.title}`);
-    body.image = await getDownloadURL(imageRef);
+      const imageRef = ref(storage, `images/places/${watch('title')}/${body.title}`);
+      body.image = await getDownloadURL(imageRef);
+    } catch (erro) {
+      console.error(erro);
+      toast.error('Erro ao fazer upload de imagem');
+      throw new Error('Erro ao fazer upload de imagem');
+    }
 
     setAccessibilityList((prev) => ([ ...prev, body ]));
     setValue('descriptionDetails', '');
