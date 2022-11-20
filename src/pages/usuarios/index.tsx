@@ -4,11 +4,11 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BsChevronRight } from "react-icons/bs";
 import { Container } from "../../components/containers";
 import { Loading } from "../../components/loading";
-import { useUser } from "../../hooks/use-user";
+import { useUsers } from "../../hooks/use-user";
 import { useDeficiency } from "../../hooks/use-deficiency";
 
 const Locations = () => {
-  const { users } = useUser();
+  const { users } = useUsers();
   const { usersWithDeficiency, usersWithoutDeficiency } = useDeficiency();
 
   if (!users) return (
@@ -48,7 +48,7 @@ const Locations = () => {
           :
           users.map((user, index) => {
             return (
-              <Link href={``} key={index}>
+              <Link href={`usuarios/${user.uid}`} key={index}>
                 <a className="flex justify-between bg-white hover:bg-gray-100 duration-150 rounded-lg w-[500px] px-3 py-2 mb-3 items-center">
                   <div className="flex items-center">
                     <div>

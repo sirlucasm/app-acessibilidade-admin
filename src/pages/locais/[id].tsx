@@ -1,10 +1,11 @@
-import Link from "next/link";
-import { MdPlace } from 'react-icons/md';
+import { useRouter } from "next/router";
 import { Container } from "../../components/containers";
 import { Loading } from "../../components/loading";
-import { useAuthContext } from "../../contexts/auth.context";
 
-const ShowLocation = ({ id }) => {
+const ShowLocation = (params) => {
+  const router = useRouter();
+  const { id } = router.query;
+
   if (!id) return (
     <Container justifyContent="center" alignItems="center">
       <Loading size={50} />
@@ -17,7 +18,7 @@ const ShowLocation = ({ id }) => {
         <h2 className="text-2xl">Local</h2>
       </div>
       <div className="flex items-center mt-7">
-        
+
       </div>
     </div>
   )

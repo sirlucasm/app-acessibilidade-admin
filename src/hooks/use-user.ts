@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { firestore } from "../configs/firebase";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, doc, getDoc, onSnapshot, orderBy, query } from "firebase/firestore";
 import { User } from "../@types/user.type";
 
-export const useUser = () => {
+export const useUsers = () => {
   const [users, setUsers] = useState<User[] | undefined>();
 
   const usersCollection = collection(firestore, 'users');
@@ -22,4 +22,21 @@ export const useUser = () => {
   }, [])
 
   return { users };
-}
+};
+
+export const useUser = (uid: string) => {
+  const [user, setUser] = useState<User | undefined>();
+
+  const fetchUser = useCallback(async () => {
+    const docRef = doc(firestore, 'users', uid);
+    const res = await getDoc(docRef);
+
+    setUser(res.data() as any);
+  }, []);
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  return { user };
+};
