@@ -30,7 +30,8 @@ const NewLocation = () => {
     data.thumbImage = await getDownloadURL(thumbRef);
 
     const docRef = doc(collection(firestore, 'places'));
-    await setDoc(docRef, {
+
+    await toast.promise(setDoc(docRef, {
       accessibilityList,
       accessible: data.accessible,
       description: data.description,
@@ -40,10 +41,11 @@ const NewLocation = () => {
       locality: data.locality,
       thumbImage: data.thumbImage,
       title: data.title
-    });
-
-    toast.success('Local cadastrado com sucesso!');
-    router.replace('/locais');
+    }), {
+      pending: 'Cadastrando novo local',
+      success: 'Local cadastrado com sucesso!'
+    })
+      .then(() => router.replace('/locais'));
   }
 
   const handleOpenAddDetailsModal = () => setIsModalOpenAddDetails(true);
@@ -66,7 +68,10 @@ const NewLocation = () => {
     ) return;
 
     try {
-      await handleUploadProfileImage(body.image, body.title);
+      await toast.promise(handleUploadProfileImage(body.image, body.title), {
+        pending: 'adicionando detalhe do local',
+        success: 'Adicionado'
+      });
 
       const imageRef = ref(storage, `images/places/${watch('title')}/${body.title}`);
       body.image = await getDownloadURL(imageRef);

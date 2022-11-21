@@ -39,11 +39,11 @@ export const Alert = ({
       }}
     >
       <div className="flex flex-col items-end justify-between" style={{ height: '100%' }}>
-        <div className="self-center">
-          <div>
+        <div className="flex flex-col self-center">
+          <div className="self-center">
             <h2 className="text-xl font-semibold">{title}</h2>
           </div>
-          <div>
+          <div className="mt-2.5">
             <span>{message}</span>
           </div>
         </div>

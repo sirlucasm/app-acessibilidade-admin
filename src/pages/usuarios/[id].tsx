@@ -29,10 +29,18 @@ const ShowUser = () => {
   const deleteUser = useCallback(async () => {
     const docRef = doc(firestore, 'users', user?.uid);
     const defRef = doc(firestore, 'deficiencies', user?.uid);
-    await deleteDoc(docRef);
-    await deleteDoc(defRef);
 
-    toast.success('Usuário excluido com sucesso');
+    await toast.promise(async () => {
+      await deleteDoc(docRef);
+      await deleteDoc(defRef);
+    }, {
+      pending: 'Excluindo usuário',
+      success: 'Usuário excluido com sucesso'
+    })
+      .then(() => {
+        setOpenDeleteAlert(false);
+        router.replace('/usuarios');
+      });
   }, [user]);
 
   if (!user) return (
@@ -81,6 +89,7 @@ const ShowUser = () => {
         isOpen={openDeleteAlert}
         onRequestClose={() => setOpenDeleteAlert(false)}
         title = 'Deseja excluir o usuário?'
+        message='Esta ação não poderá ser desfeita'
         handleFunction={deleteUser}
       />
     </div>

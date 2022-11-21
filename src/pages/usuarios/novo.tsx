@@ -25,25 +25,31 @@ const NewUser = () => {
         toast.error('Não foi possível criar usuário');
         return;
       }
-      await updateProfile(user, {
-        displayName: body.name,
-        photoURL: body.photoURL
-      });
+
       const docRef = doc(firestore, 'users', user.uid);
-      await setDoc(docRef, {
-        uid: user.uid,
-        ...body
-      });
-
       const deficiencyDocRef = doc(firestore, 'deficiencies', user.uid);
-      await setDoc(deficiencyDocRef, {
-        userId: user.uid,
-        data: [],
-        reducedMobility: false
-      });
 
-      toast.success('Usuário cadastrado com sucesso!');
-      auth.signOut();
+      await toast.promise(async () => {
+        await updateProfile(user, {
+          displayName: body.name,
+          photoURL: body.photoURL
+        });
+
+        await setDoc(docRef, {
+          uid: user.uid,
+          ...body
+        });
+
+        await setDoc(deficiencyDocRef, {
+          userId: user.uid,
+          data: [],
+          reducedMobility: false
+        });
+      }, {
+        pending: 'Cadastrando novo usuário',
+        success: 'Usuário cadastrado com sucesso!'
+      })
+        .then(() => auth.signOut());
     } catch(error) {
       console.error(error);
       toast.error(error.message);

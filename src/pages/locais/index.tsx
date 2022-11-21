@@ -4,12 +4,12 @@ import { Loading } from "../../components/loading";
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BsChevronRight } from 'react-icons/bs';
 import { FaRegDotCircle } from 'react-icons/fa';
-import { usePlace } from "../../hooks/use-place";
+import { usePlaces } from "../../hooks/use-place";
 import Image from "next/image";
 import { generateAccessibleObj } from "../../utils/place";
 
 const Locations = () => {
-  const { places } = usePlace();
+  const { places } = usePlaces();
 
   if (!places) return (
     <Container justifyContent="center" alignItems="center">
