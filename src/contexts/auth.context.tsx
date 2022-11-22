@@ -20,8 +20,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         if (router.pathname === '/') router.replace('/app');
+        if (router.pathname === '/esqueci-senha') router.replace('/app');
         setCurrentUser(await getUserData(user.uid))
-      } else {
+      } else if (
+        router.pathname !== '/esqueci-senha'
+      ) {
         router.replace('/');
       }
     })
