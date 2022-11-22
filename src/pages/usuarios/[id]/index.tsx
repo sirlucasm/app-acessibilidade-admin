@@ -3,21 +3,19 @@ import Link from "next/link";
 import { useState } from 'react';
 import { useRouter } from "next/router";
 import { useCallback } from "react";
-import { BsTrash } from "react-icons/bs";
+import { BsPencil, BsTrash } from "react-icons/bs";
 import { MdPlace } from 'react-icons/md';
 import { toast } from "react-toastify";
-import { Alert } from "../../components/Alert";
-import { Container } from "../../components/containers";
-import { Loading } from "../../components/loading";
-import { useAuthContext } from "../../contexts/auth.context";
-import { useUser } from "../../hooks/use-user";
+import { Alert } from "../../../components/Alert";
+import { Container } from "../../../components/containers";
+import { Loading } from "../../../components/loading";
+import { useAuthContext } from "../../../contexts/auth.context";
+import { useUser } from "../../../hooks/use-user";
 import { deleteDoc, doc } from "firebase/firestore";
-import { firestore } from "../../configs/firebase";
+import { firestore } from "../../../configs/firebase";
 
-const ShowUser = () => {
+const ShowUser = ({ id }) => {
   const router = useRouter();
-  const { id }: any = router.query;
-  if (!id) return;
 
   const { user } = useUser(id);
   const [openDeleteAlert, setOpenDeleteAlert] = useState(false);
@@ -52,37 +50,44 @@ const ShowUser = () => {
   return (
     <div className="flex flex-col p-10 h-[100vh] bg-primary">
       <div className="">
-        <h2 className="text-2xl">Usuário de id: {user?.uid}</h2>
+        <h2 className="text-3xl">Usuário de id: {user?.uid}</h2>
       </div>
-      <div className="mt-5">
+      <div className="mt-5 flex flex-col gap-2">
         <button onClick={handleDeleteUser}>
           <a className="flex items-center justify-center bg-red-500 hover:bg-red-600 w-[135px] py-2 text-white text-sm">
             <BsTrash className="mr-2" color="#fff" size={21} />
             <span>Excluir usuário</span>
           </a>
         </button>
+        <Link href={`${user.uid}/editar`}>
+          <a className="flex items-center justify-center bg-gray-500 hover:bg-gray-600 w-[135px] py-2 text-white text-sm">
+            <BsPencil className="mr-2" color="#fff" size={21} />
+            <span>Editar usuário</span>
+          </a>
+        </Link>
       </div>
-      <div className="flex flex-col mt-7">
+      <div className="flex flex-col md:flex-row gap-5 mt-7 max-w-[45vw] bg-white p-5 rounded-md">
         <div className="flex items-center">
           <Image
             src={user?.photoURL}
             alt="User Image"
-            width={60}
-            height={60}
+            width={90}
+            height={90}
+            layout="fixed"
             className="rounded-lg"
           />
         </div>
-        <div className="flex items-center">
-          <h2 className="font-bold text-md">Nome:</h2>
-          <span className="ml-2 text-lg">{user?.name}</span>
-        </div>
-        <div className="flex items-center">
-          <h2 className="font-bold text-md">Email:</h2>
-          <span className="ml-2 text-lg">{user?.email}</span>
-        </div>
-        <div className="flex items-center">
-          <h2 className="font-bold text-md">Admin:</h2>
-          <span className="ml-2 text-lg">{user?.admin ? 'sim' : 'não'}</span>
+        <div className="flex flex-col">
+          <div>
+            <span className="text-2xl text-gray-800">{user?.name}</span>
+          </div>
+          <div>
+            <span className="text-xl text-gray-800">{user?.email}</span>
+          </div>
+          <div className="flex items-center text-gray-800">
+            <h2 className="font-bold text-xl">Admin:</h2>
+            <span className="ml-2 text-xl">{user?.admin ? 'sim' : 'não'}</span>
+          </div>
         </div>
       </div>
       <Alert
@@ -97,3 +102,11 @@ const ShowUser = () => {
 }
 
 export default ShowUser;
+
+export const getServerSideProps = (ctx) => {
+  return {
+    props: {
+      id: ctx.query.id
+    }
+  }
+}

@@ -120,7 +120,7 @@ const NewLocation = () => {
   return (
     <div className="flex flex-col p-10 h-[100vh] bg-primary">
       <div className="">
-        <h2 className="text-2xl font-bold">Novo local</h2>
+        <h2 className="text-3xl font-bold">Novo local</h2>
       </div>
       <form className="mt-5 w-[450px]" onSubmit={handleSubmit(onSubmit)}>
         <div>

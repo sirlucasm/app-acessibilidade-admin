@@ -18,10 +18,10 @@ const Application = () => {
   return (
     <div className="flex flex-col p-10 h-[100vh] bg-primary">
       <div className="flex items-center justify-between sm:w-[400px]">
-        <h2 className="text-2xl">Olá, <strong>{currentUser.name}</strong></h2>
+        <h2 className="text-3xl">Olá, <strong>{currentUser.name}</strong></h2>
         <button
           onClick={() => signOut(auth)}
-          className="border-0 text-blue-600 hover:text-blue-800 hover:underline"
+          className="border-0 text-blue-600 hover:text-blue-800 hover:underline text-lg"
         >
           sair
         </button>
