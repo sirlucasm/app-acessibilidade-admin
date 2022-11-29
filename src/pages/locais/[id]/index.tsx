@@ -91,7 +91,7 @@ const ShowLocation = ({ id }) => {
             <h2 className="font-bold text-xl">Localização:</h2>
             <span className="ml-2 text-xl">{place?.locality}</span>
           </div>
-          <div className="mt-2 flex items-center">
+          <div className="mt-2 flex items-center text-lg font-semibold">
             <FaRegDotCircle className="mr-1.5" color={accessibleObj.color} />
             <span style={{ color: accessibleObj.color }}>
               {accessibleObj.text}
@@ -106,7 +106,7 @@ const ShowLocation = ({ id }) => {
             return (
               <button className="mt-2 flex items-center" key={index} onClick={() => handleOpenAccessibilityDetailsModal(item)}>
                 <FaRegDotCircle className="mr-1.5" color={accessibleItem.color} />
-                <span style={{ color: accessibleItem.color }}>
+                <span style={{ color: accessibleItem.color, fontWeight: 600 }}>
                   {item.title}
                 </span>
               </button>

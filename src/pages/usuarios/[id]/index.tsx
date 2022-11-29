@@ -53,11 +53,12 @@ const ShowUser = ({ id }) => {
         <h2 className="text-3xl">Usuário de id: {user?.uid}</h2>
       </div>
       <div className="mt-5 flex flex-col gap-2">
-        <button onClick={handleDeleteUser}>
-          <a className="flex items-center justify-center bg-red-500 hover:bg-red-600 w-[135px] py-2 text-white text-sm">
-            <BsTrash className="mr-2" color="#fff" size={21} />
-            <span>Excluir usuário</span>
-          </a>
+        <button
+          className="flex items-center justify-center bg-red-500 hover:bg-red-600 w-[135px] py-2 text-white text-sm"
+          onClick={handleDeleteUser}
+        >
+          <BsTrash className="mr-2" color="#fff" size={21} />
+          <span>Excluir usuário</span>
         </button>
         <Link href={`${user.uid}/editar`}>
           <a className="flex items-center justify-center bg-gray-500 hover:bg-gray-600 w-[135px] py-2 text-white text-sm">

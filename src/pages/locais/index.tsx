@@ -57,7 +57,7 @@ const Locations = () => {
                       <span className="text-[#696969] text-sm">{place.locality}</span>
                       <div className="mt-2 flex items-center">
                         <FaRegDotCircle className="mr-1.5" color={accessibleObj.color} />
-                        <span style={{ color: accessibleObj.color }}>
+                        <span style={{ color: accessibleObj.color, fontWeight: 700 }}>
                           {accessibleObj.text}
                         </span>
                       </div>
